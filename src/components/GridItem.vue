@@ -647,13 +647,14 @@
 
                 this.lastX = x;
                 this.lastY = y;
-
+               this.$emit("dragEvent", event);
                 if (this.innerX !== pos.x || this.innerY !== pos.y) {
                     this.$emit("move", this.i, pos.x, pos.y);
                 }
                 if (event.type === "dragend" && (this.previousX !== this.innerX || this.previousY !== this.innerY)) {
                     this.$emit("moved", this.i, pos.x, pos.y);
                 }
+
                 this.eventBus.$emit("dragEvent", event.type, this.i, pos.x, pos.y, this.innerH, this.innerW);
             },
             calcPosition: function (x, y, w, h) {

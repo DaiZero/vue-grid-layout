@@ -73,6 +73,7 @@
                            @resized="resized"
                            @container-resized="containerResized"
                            @moved="moved"
+                           @dragEvent="dragEvent"
                 >
                     <!--<custom-drag-element :text="item.i"></custom-drag-element>-->
                     <test-element :text="item.i"></test-element>
@@ -217,6 +218,9 @@
             containerResized: function(i, newH, newW, newHPx, newWPx){
                 console.log("### CONTAINER RESIZED i=" + i + ", H=" + newH + ", W=" + newW + ", H(px)=" + newHPx + ", W(px)=" + newWPx);
             },
+          dragEvent(event){
+            console.log("dragEvent",event)
+          },
             /**
              * Add change direction button
              */
