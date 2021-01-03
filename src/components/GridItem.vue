@@ -564,6 +564,14 @@ export default {
 
       this.lastW = x;
       this.lastH = y;
+      let resizeData = {
+        event: event,
+        i: this.i,
+        pos: pos,
+        innerH: this.innerH,
+        innerW: this.innerW
+      }
+      this.$emit("resizeEvent", resizeData);
 
       if (this.innerW !== pos.w || this.innerH !== pos.h) {
         this.$emit("resize", this.i, pos.h, pos.w, newSize.height, newSize.width);
@@ -647,14 +655,14 @@ export default {
 
       this.lastX = x;
       this.lastY = y;
-      let dragData={
-        event:event,
-        i:this.i,
-        pos:pos,
-        innerH:this.innerH,
-        innerW:this.innerW
+      let dragData = {
+        event: event,
+        i: this.i,
+        pos: pos,
+        innerH: this.innerH,
+        innerW: this.innerW
       }
-      this.$emit("dragEvent",dragData);
+      this.$emit("dragEvent", dragData);
       if (this.innerX !== pos.x || this.innerY !== pos.y) {
         this.$emit("move", this.i, pos.x, pos.y);
       }
