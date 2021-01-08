@@ -328,6 +328,9 @@ export default {
     this.createStyle();
   },
   watch: {
+    style: function () {
+      this.$emit("styleChanged", JSON.parse(JSON.stringify(this.style)));
+    },
     isDraggable: function () {
       this.draggable = this.isDraggable;
     },
@@ -868,8 +871,14 @@ export default {
         pos.w = 1;
       }
 
-      // this.lastW = x; // basically, this is copied from resizehandler, but shouldn't be needed
-      // this.lastH = y;
+      let resizeData = {
+        event: null,
+        i: this.i,
+        pos: pos,
+        innerH: this.innerH,
+        innerW: this.innerW
+      }
+      this.$emit("resizeEvent", resizeData);
 
       if (this.innerW !== pos.w || this.innerH !== pos.h) {
         this.$emit("resize", this.i, pos.h, pos.w, newSize.height, newSize.width);
@@ -879,6 +888,6 @@ export default {
         this.eventBus.$emit("resizeEvent", "resizeend", this.i, this.innerX, this.innerY, pos.h, pos.w);
       }
     }
-  },
+  }
 }
 </script>
